@@ -9,7 +9,7 @@ class HomeTemp extends StatelessWidget {
         title: Text('Componentes temp'),
       ),
       body: ListView(
-        children: _crearItems(),
+        children: _crearItemsCorto(),
       ),
     );
   }
@@ -29,4 +29,18 @@ class HomeTemp extends StatelessWidget {
 
     return lista;
   }
+
+  List<Widget> _crearItemsCorto(){
+  return opciones.map((item) => Column(children: [
+    ListTile(
+      title: Text(item + '!' ),
+      subtitle: Text('Cualquier Cosa'),
+      leading: Icon(Icons.access_alarms),
+      trailing: Icon(Icons.keyboard_arrow_right),
+      onTap: (){},
+    ),
+    Divider()
+  ],)).toList();
+  }
 }
+
