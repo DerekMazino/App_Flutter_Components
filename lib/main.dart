@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 //Mis imports
-import 'package:app_flutter_components/src/pages/home_temp.dart';
+import 'src/pages/home_page.dart';
+//import 'package:app_flutter_components/src/pages/home_temp.dart';
 void main() => runApp(MyApp());
 class MyApp extends StatelessWidget {
   @override
@@ -9,7 +10,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Compontes App',
       debugShowCheckedModeBanner: false,
-      home: HomeTemp()
+      home: HomePage()
     );
   }
 }
