@@ -11,12 +11,12 @@ class _MenuProvider{
   _MenuProvider() {
     //cargarData();
   }
-
+  //Retorna un Future que contiene una lista
   Future<List<dynamic>> cargarData() async{
-    //Retorna un Future, por lo tanto usamos then
+    //Retorna un Future, se le dice que espere a que se cargue la data antes de hacer el return
     final resp = await rootBundle.loadString('data/menu_opts.json');
     Map dataMap = json.decode(resp);
-    print(dataMap['rutas']);
+    //print(dataMap['rutas']);
     opciones = dataMap['rutas'];
     return opciones;
   }
