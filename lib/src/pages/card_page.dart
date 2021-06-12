@@ -10,7 +10,9 @@ class CardPage extends StatelessWidget {
       ),
       body: ListView(
         children: [
-          _cardTipo1()
+          _cardTipo1(),
+          SizedBox(height: 30,),
+          _cardTipo2(),
         ],
         padding: EdgeInsets.all(10.0),
       ),
@@ -36,6 +38,26 @@ class CardPage extends StatelessWidget {
           ],)
         ],
       ),
+    );
+  }
+
+  _cardTipo2() {
+    return Card(
+      child: Column(children: [
+        FadeInImage(
+          placeholder: AssetImage('assets/jar-loading.gif'), 
+          fadeInDuration: Duration(
+            milliseconds: 200,
+          ),
+          height: 300.0,
+          fit: BoxFit.cover, //Como la imgen debe ocupar el espacio que tiene
+          image: NetworkImage('https://images.pexels.com/photos/934718/pexels-photo-934718.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940'),
+        ),
+        Container(
+          child: Text('No tengo idea que poner'),
+          padding: EdgeInsets.all(10.0),
+        )
+      ],),
     );
   }
 }
