@@ -22,6 +22,8 @@ class CardPage extends StatelessWidget {
 
   Widget _cardTipo1() {
     return Card(
+      elevation: 20.0,//Proyección de la Sombra
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),//Borde de la card
       child: Column(
         children: [
           ListTile(
@@ -41,8 +43,10 @@ class CardPage extends StatelessWidget {
     );
   }
 
-  _cardTipo2() {
+  Widget _cardTipo2() {
     return Card(
+      clipBehavior: Clip.antiAlias,//Hace que nada de lo que este en la tarjeta se salga de ella
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),//Borde circular
       child: Column(children: [
         FadeInImage(
           placeholder: AssetImage('assets/jar-loading.gif'), 
@@ -54,10 +58,11 @@ class CardPage extends StatelessWidget {
           image: NetworkImage('https://images.pexels.com/photos/934718/pexels-photo-934718.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940'),
         ),
         Container(
-          child: Text('No tengo idea que poner'),
+          child: Text('Usando clipBehavior'),
           padding: EdgeInsets.all(10.0),
         )
       ],),
     );
   }
+
 }
