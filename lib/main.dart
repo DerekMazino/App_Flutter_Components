@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:app_flutter_components/src/pages/alert_page.dart';
 import 'package:app_flutter_components/src/routes/routes.dart';
 //import 'package:app_flutter_components/src/pages/home_temp.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 void main() => runApp(MyApp());
 class MyApp extends StatelessWidget {
   @override
@@ -21,6 +22,15 @@ class MyApp extends StatelessWidget {
           builder: (BuildContext context) => AlertPage()
         );
       },
+      localizationsDelegates: [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: [
+        const Locale('en', ''), // English, no country code
+        const Locale('es', ''), // Spanish, no country code
+      ],
     );
   }
 }
