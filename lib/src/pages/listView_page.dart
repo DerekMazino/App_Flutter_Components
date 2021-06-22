@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'dart:async';
+
 class ListViewPage extends StatefulWidget {
 
   @override
@@ -9,6 +11,8 @@ class _ListViewPageState extends State<ListViewPage> {
   List<int> _listaNumeros = [];
   int _ultimoItem = 0;
   ScrollController _scrollController =  ScrollController();
+  bool _isLoading = false;
+
   @override
   void initState() {
     // TODO: implement initState
@@ -17,15 +21,26 @@ class _ListViewPageState extends State<ListViewPage> {
     _scrollController.addListener(() {
       //Preguntar si el scroll esta en la posición maxima posible
       if(_scrollController.position.pixels == _scrollController.position.maxScrollExtent){
-        _agregar10();
+        _fetchData();
       }
     });
+  }
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    _scrollController.dispose();
   }
 @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text('ListView Builder'),),
-      body: _crearLista(),
+      body: Stack(
+        children: [
+          _crearLista(),
+          _crearLoading()
+        ],
+      )
     );
   }
 
@@ -51,5 +66,42 @@ class _ListViewPageState extends State<ListViewPage> {
     setState(() {
       
     });
+  }
+  Future _fetchData() async{
+    _isLoading = true;
+    setState(() {
+      
+    });
+    final duracion = Duration(seconds: 2);
+    return new Timer(duracion, respuestaHTTP);
+  }
+  void respuestaHTTP(){
+    _isLoading = false;
+    _scrollController.animateTo(
+      _scrollController.position.pixels + 100,
+      curve: Curves.fastOutSlowIn,
+      duration: Duration(milliseconds: 250)
+    );
+    _agregar10();
+  }
+
+  Widget _crearLoading(){
+    if(_isLoading){
+      return Column(
+        mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              CircularProgressIndicator(),
+            ],
+          ),
+          SizedBox(height: 15.0)
+          
+        ],
+      );
+    }
+    return Container();
   }
 }
