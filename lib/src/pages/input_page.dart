@@ -11,6 +11,7 @@ class _InputPageState extends State<InputPage> {
   String _nombre = '';
   String _email  = '';
   String _fecha  = '';
+  List<String> _poderes = ['Volar', 'Regeneración', 'Telequinesis', 'Super Fuerza'];
   TextEditingController _inputFieldDate = TextEditingController();
 
   String _opcionSeleccionada = 'Volar';
@@ -31,6 +32,8 @@ class _InputPageState extends State<InputPage> {
           _crearPassword(),
           Divider(),
           _crearFecha(context),
+          Divider(),
+          _crearDropDown(),
           Divider(),
           _crearPersona(),
           
@@ -135,6 +138,38 @@ class _InputPageState extends State<InputPage> {
     );
   }
 
+  List<DropdownMenuItem<String>>getOpcionesDropDown(){
+    List<DropdownMenuItem<String>> lista = [];
+    _poderes.forEach((element) => lista.add(DropdownMenuItem(
+      child: Text(element),
+      value: element,
+    )));
+    return lista;
+  }
+
+  Widget _crearDropDown() {
+    
+    return Row(
+      children: [
+        Icon(Icons.select_all),
+        SizedBox(width: 30,),
+        Expanded(
+                  child: DropdownButton(
+            items: getOpcionesDropDown(),
+            value: _opcionSeleccionada,
+            onChanged: (opt){
+              setState(() {
+                _opcionSeleccionada = opt.toString();
+              });
+            },
+          ),
+        ),
+        
+      ],
+    );
+
+  }
+
   _selectDate(BuildContext context) async {
     DateTime? picked = await showDatePicker(
       context: context, 
@@ -151,4 +186,5 @@ class _InputPageState extends State<InputPage> {
     }
 
   }
+
 }
