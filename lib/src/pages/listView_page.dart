@@ -6,7 +6,21 @@ class ListViewPage extends StatefulWidget {
 _ListViewPageState createState() => _ListViewPageState();}
 
 class _ListViewPageState extends State<ListViewPage> {
-  List<int> _listaNumeros = [1, 2, 3, 4, 5];
+  List<int> _listaNumeros = [];
+  int _ultimoItem = 0;
+  ScrollController _scrollController =  ScrollController();
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _agregar10();
+    _scrollController.addListener(() {
+      //Preguntar si el scroll esta en la posición maxima posible
+      if(_scrollController.position.pixels == _scrollController.position.maxScrollExtent){
+        _agregar10();
+      }
+    });
+  }
 @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,6 +32,7 @@ class _ListViewPageState extends State<ListViewPage> {
   Widget _crearLista(){
     return ListView.builder(
       itemCount: _listaNumeros.length,
+      controller: _scrollController,
       itemBuilder: (BuildContext context, int index){
         final imagen = _listaNumeros[index];
         return FadeInImage(
@@ -26,5 +41,15 @@ class _ListViewPageState extends State<ListViewPage> {
         );
       },
     );
+  }
+
+  void _agregar10(){
+    for(var i = 1; i <= 10; i++){
+      _ultimoItem ++;
+      _listaNumeros.add(_ultimoItem);
+    }
+    setState(() {
+      
+    });
   }
 }
